@@ -1,0 +1,11 @@
+import pandas as pd
+data=pd.read_csv("Act17.csv")
+print(data)
+print("Usernames:")
+print(data["Username"])
+print("Row at index 2:")
+print(data.loc[2,["Username","Passwords"]])
+print("Ascending Usernames:")
+print(data["Username"].sort_values(ascending=True))
+print("Descending Passwords:")
+print(data["Passwords"].sort_values(ascending=False))
