@@ -1,0 +1,64 @@
+--Activity 3
+SELECT s_id, s_city FROM salesman;
+SELECT *FROM salesman WHERE s_city='Paris';
+SELECT s_id, commission FROM salesman WHERE s_name='Paul Adam';
+
+--Activity 4
+ALTER TABLE salesman ADD(grade int);
+UPDATE salesman SET GRADE=100;
+SELECT *FROM salesman;
+
+--Activity 5
+UPDATE salesman SET grade=200 WHERE s_city='Rome';
+UPDATE salesman SET grade=300 WHERE s_name='James Hoog';
+UPDATE salesman SET s_name='Pierre' WHERE s_name='McLyon';
+
+--Activity 6
+SELECT DISTINCT(salesman_id) FROM orders;
+SELECT order_no FROM orders ORDER BY order_no;
+SELECT order_no,purchase_amount FROM orders ORDER BY purchase_amount DESC;
+SELECT *FROM orders WHERE purchase_amount<500;
+SELECT *FROM orders WHERE purchase_amount BETWEEN 1000 AND 2000;
+
+--Activity 7
+SELECT SUM(purchase_amount) total_value FROM orders;
+SELECT AVG(purchase_amount) average_value FROM orders;
+SELECT MAX(purchase_amount) maximum_value FROM orders;
+SELECT MIN(purchase_amount) minimum_value FROM orders;
+SELECT DISTINCT(salesman_id) total_count FROM orders;
+
+--Activity 8
+
+SELECT customer_id, MAX(purchase_amount)maximum_purchase FROM orders GROUP BY customer_id;
+SELECT salesman_id, MAX(purchase_amount) AS max_purchase FROM orders WHERE order_date = DATE '2012-08-17' GROUP BY salesman_id;
+SELECT customer_id, order_date, purchase_amount FROM orders WHERE purchase_amount IN (2030, 2450, 5760, 6000);
+
+--Activity 9
+
+select s.salesman_name,c.customer_name  from customers
+  c join salesman  s on c.salesman_id=s.salesman_id;
+
+SELECT c.customer_name ,s.salesman_name,s.grade from customers c JOIN
+salesman s on s.grade<300;
+
+select c.customer_name from customers c join salesman s
+on c.SALESMAN_ID=s.SALESMAN_ID where s.commission>12;
+
+select o.order_date,o.order_no,o.purchase_amount,c.customer_name from
+ORDERS o join customers c on
+
+
+--Activity 10
+select * from orders where salesman_id=
+(select  salesman_id from customers where customer_id=3007);
+
+
+select * from orders where salesman_id in(select salesman_id
+from salesman where salesman_city='New York');
+
+select count(*) from customers where grade>(select avg(grade)
+from customers where city='New York');
+
+select * from orders where salesman_id in(select salesman_id
+from salesman where commission=(select max(commission) from salesman));
+
